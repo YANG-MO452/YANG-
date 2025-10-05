@@ -1,4 +1,7 @@
-FROM nginx:alpine
-COPY nginx.conf /etc/nginx/nginx.conf
+FROM teddysun/v2ray:latest
+
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+
+COPY config.json /etc/v2ray/config.json
+
+CMD ["v2ray", "run", "-config", "/etc/v2ray/config.json"]
