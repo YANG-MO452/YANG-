@@ -1,7 +1,6 @@
-FROM teddysun/v2ray:latest
-
+FROM alpine:latest
 EXPOSE 8080
-
-COPY config.json /etc/v2ray/config.json
-
-CMD ["v2ray", "run", "-config", "/etc/v2ray/config.json"]
+WORKDIR /app
+RUN wget https://github.com/v2fly/v2ray-core/releases/latest/download/v2ray-linux-64.zip && unzip v2ray-linux-64.zip && rm v2ray-linux-64.zip && rm config.json
+COPY config.json /app
+ENTRYPOINT ["./v2ray","run"]
